@@ -6,8 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.SpinMotorSquareWave;
-import frc.robot.subsystems.Motor1;
+import frc.robot.subsystems.TestMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -18,13 +19,15 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Motor1 m_exampleSubsystem = new Motor1();
+  private final TestMotor m_TestMotor = new TestMotor();
 
-  private final SpinMotorSquareWave m_autoCommand = new SpinMotorSquareWave(m_exampleSubsystem);
+  private final SpinMotorSquareWave m_SpinMotorSquareWave = new SpinMotorSquareWave(m_TestMotor);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
+    SmartDashboard.putData(m_TestMotor);
+    SmartDashboard.putData("Square Wave", new SpinMotorSquareWave(m_TestMotor));
+    // Configure the button bindings  
     configureButtonBindings();
   }
 
@@ -41,8 +44,4 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
 }
