@@ -10,19 +10,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 /** An example command that uses an example subsystem. */
-public class SpinMotorSquareWave extends CommandBase {
+public class SpinMotorSquareWaveVbus extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final TestMotor m_TestMotor;
   public double startTime;
-  public double period = 20;
-  public double dutycycle = 0.5;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public SpinMotorSquareWave(TestMotor subsystem) {
+  public SpinMotorSquareWaveVbus(TestMotor subsystem) {
     m_TestMotor = subsystem;
   }
 
@@ -30,13 +28,15 @@ public class SpinMotorSquareWave extends CommandBase {
   @Override
   public void initialize() {
     startTime = Timer.getFPGATimestamp();
-    m_TestMotor.runMotorVelocity(100);
+    m_TestMotor.runMotorVbus(0.1);
+    // System.out.println(startTime + 1);
+    // System.out.println(Timer.getFPGATimestamp());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(startTime + (period * dutycycle) < Timer.getFPGATimestamp()){
+    if(startTime + 1 < Timer.getFPGATimestamp()){
       m_TestMotor.stopMotor();
     }
   }
@@ -50,11 +50,12 @@ public class SpinMotorSquareWave extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(startTime + (period - (period * dutycycle)) < Timer.getFPGATimestamp()){
+    if(startTime + 2 < Timer.getFPGATimestamp()){
       return true;
     }
     else{
       return false;
     }
   }
+  
 }

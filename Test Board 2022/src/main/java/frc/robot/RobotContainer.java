@@ -7,7 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.ResetEncoderPosition;
 import frc.robot.commands.SpinMotorSquareWave;
+import frc.robot.commands.SpinMotorSquareWaveVbus;
+import frc.robot.subsystems.Telemetry;
 import frc.robot.subsystems.TestMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -19,14 +22,15 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final TestMotor m_TestMotor = new TestMotor();
+  private final static TestMotor m_TestMotor = new TestMotor();
+  private final static Telemetry m_Telemetry = new Telemetry(m_TestMotor);
 
-  private final SpinMotorSquareWave m_SpinMotorSquareWave = new SpinMotorSquareWave(m_TestMotor);
+  // private final SpinMotorSquareWave m_SpinMotorSquareWave = new SpinMotorSquareWave(m_TestMotor);
+  // private final SpinMotorSquareWaveVbus m_SpinMotorSquareWaveVbus = new SpinMotorSquareWaveVbus(m_TestMotor);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    SmartDashboard.putData(m_TestMotor);
-    SmartDashboard.putData("Square Wave", new SpinMotorSquareWave(m_TestMotor));
+    
     // Configure the button bindings  
     configureButtonBindings();
   }
